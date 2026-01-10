@@ -84,3 +84,66 @@
 .group:hover .icon-accent {
     box-shadow: 0 4px 25px rgba(251, 191, 36, 0.2);
 }
+
+/* Clickable card styles */
+.clickable-card {
+    @apply relative overflow-hidden rounded-2xl border border-white/5 bg-white/[0.02] backdrop-blur-xl;
+    @apply transition-all duration-300 cursor-pointer;
+}
+
+.clickable-card:hover {
+    @apply border-amber-500/30 scale-[1.02];
+    box-shadow: 0 8px 32px rgba(251, 191, 36, 0.08);
+}
+
+/* Animated gradient */
+@keyframes gradientShift {
+
+    0%,
+    100% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+}
+
+.animate-gradient {
+    background-size: 200% 200%;
+    animation: gradientShift 8s ease infinite;
+}
+
+/* Detail page styles */
+.detail-hero {
+    @apply pt-24 pb-20;
+}
+
+.back-button {
+    @apply inline-flex items-center gap-2 text-zinc-500 transition-colors;
+}
+
+.back-button:hover {
+    @apply text-white;
+}
+
+.back-button:hover svg {
+    transform: translateX(-4px);
+}
+
+/* Feature card hover state */
+.feature-link {
+    @apply flex gap-5 items-start p-4 -m-4 rounded-xl transition-colors;
+}
+
+.feature-link:hover {
+    @apply bg-white/[0.02];
+}
+
+.feature-link:hover .feature-arrow {
+    @apply opacity-100 translate-x-0;
+}
+
+.feature-arrow {
+    @apply opacity-0 -translate-x-2 transition-all;
+}

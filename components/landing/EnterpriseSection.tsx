@@ -1,9 +1,31 @@
 "use client";
 
-import { CreditCard, Plane, Building2, Shield, Lock, Key } from "lucide-react";
+import Link from "next/link";
+import { CreditCard, Plane, Building2, Shield, Lock, Key, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function EnterpriseSection() {
+    const useCases = [
+        {
+            icon: CreditCard,
+            title: "Premium Card Programs",
+            description: "Enhance cardholder retention with a concierge that actually works.",
+            href: "/features/card-programs"
+        },
+        {
+            icon: Plane,
+            title: "Travel & Lifestyle Platforms",
+            description: "Embed high-touch service capabilities directly into your digital product.",
+            href: "/features/travel-platforms"
+        },
+        {
+            icon: Building2,
+            title: "Enterprise Concierge Operators",
+            description: "Operational leverage for existing teams handling thousands of requests.",
+            href: "/features/enterprise-concierge"
+        }
+    ];
+
     return (
         <section id="enterprise" className="py-32 border-t border-white/5 bg-zinc-900/10">
             <div className="max-w-6xl mx-auto px-6">
@@ -15,51 +37,32 @@ export function EnterpriseSection() {
                             PRV8 is the white-label infrastructure layer for organizations that demand discretion, reliability, and speed.
                         </p>
 
-                        <ul className="space-y-6">
-                            <motion.li
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                className="flex items-start gap-4"
-                            >
-                                <div className="icon-accent">
-                                    <CreditCard className="w-5 h-5 text-amber-400" />
-                                </div>
-                                <div>
-                                    <h4 className="font-serif text-white text-base mb-1">Premium Card Programs</h4>
-                                    <p className="text-sm text-zinc-500">Enhance cardholder retention with a concierge that actually works.</p>
-                                </div>
-                            </motion.li>
-                            <motion.li
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.1 }}
-                                className="flex items-start gap-4"
-                            >
-                                <div className="icon-accent">
-                                    <Plane className="w-5 h-5 text-amber-400" />
-                                </div>
-                                <div>
-                                    <h4 className="font-serif text-white text-base mb-1">Travel &amp; Lifestyle Platforms</h4>
-                                    <p className="text-sm text-zinc-500">Embed high-touch service capabilities directly into your digital product.</p>
-                                </div>
-                            </motion.li>
-                            <motion.li
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ delay: 0.2 }}
-                                className="flex items-start gap-4"
-                            >
-                                <div className="icon-accent">
-                                    <Building2 className="w-5 h-5 text-amber-400" />
-                                </div>
-                                <div>
-                                    <h4 className="font-serif text-white text-base mb-1">Enterprise Concierge Operators</h4>
-                                    <p className="text-sm text-zinc-500">Operational leverage for existing teams handling thousands of requests.</p>
-                                </div>
-                            </motion.li>
+                        <ul className="space-y-4">
+                            {useCases.map((useCase, index) => (
+                                <motion.li
+                                    key={useCase.href}
+                                    initial={{ opacity: 0, x: -20 }}
+                                    whileInView={{ opacity: 1, x: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ delay: index * 0.1 }}
+                                >
+                                    <Link
+                                        href={useCase.href}
+                                        className="group flex items-start gap-4 p-4 -m-4 rounded-xl hover:bg-white/[0.02] transition-colors"
+                                    >
+                                        <div className="icon-accent">
+                                            <useCase.icon className="w-5 h-5 text-amber-400" />
+                                        </div>
+                                        <div className="flex-1">
+                                            <div className="flex items-center gap-2 mb-1">
+                                                <h4 className="font-serif text-white text-base">{useCase.title}</h4>
+                                                <ArrowRight className="w-4 h-4 text-amber-400 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                                            </div>
+                                            <p className="text-sm text-zinc-500">{useCase.description}</p>
+                                        </div>
+                                    </Link>
+                                </motion.li>
+                            ))}
                         </ul>
                     </div>
 

@@ -1,60 +1,63 @@
 "use client";
 
-import { Sparkles, Target, Users, Loader2, CalendarCheck, CheckCircle2 } from "lucide-react";
+import Link from "next/link";
+import { Sparkles, Target, Users, Loader2, CalendarCheck, CheckCircle2, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
 
 export function DifferenceSection() {
+    const features = [
+        {
+            icon: Sparkles,
+            title: "AI Outbound & Inbound",
+            description: "Not just a chatbot. Our infrastructure can place calls, negotiate reservations, and confirm details autonomously.",
+            href: "/features/ai-outbound"
+        },
+        {
+            icon: Target,
+            title: "Intent Before Friction",
+            description: "Predictive modeling captures user intent before they articulate a full request, reducing cognitive load.",
+            href: "/features/intent-prediction"
+        },
+        {
+            icon: Users,
+            title: "Human Escalation",
+            description: "We don't replace humans; we elevate them. Complex edge cases are seamlessly handed off to expert operators.",
+            href: "/features/human-escalation"
+        }
+    ];
+
     return (
         <section id="product" className="py-32 bg-zinc-900/10 border-t border-white/5">
             <div className="max-w-6xl mx-auto px-6 grid lg:grid-cols-2 gap-16 items-center">
                 <div>
                     <p className="text-amber-400 text-sm font-medium mb-3">The Solution</p>
                     <h2 className="font-serif text-4xl md:text-5xl font-medium text-white tracking-tight mb-10">The PRV8 Difference</h2>
-                    <div className="space-y-8">
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            className="flex gap-5 items-start"
-                        >
-                            <div className="icon-accent">
-                                <Sparkles className="w-5 h-5 text-amber-400" />
-                            </div>
-                            <div>
-                                <h3 className="font-serif text-lg text-white mb-2">AI Outbound &amp; Inbound</h3>
-                                <p className="text-sm text-zinc-500 leading-relaxed">Not just a chatbot. Our infrastructure can place calls, negotiate reservations, and confirm details autonomously.</p>
-                            </div>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.1 }}
-                            className="flex gap-5 items-start"
-                        >
-                            <div className="icon-accent">
-                                <Target className="w-5 h-5 text-amber-400" />
-                            </div>
-                            <div>
-                                <h3 className="font-serif text-lg text-white mb-2">Intent Before Friction</h3>
-                                <p className="text-sm text-zinc-500 leading-relaxed">Predictive modeling captures user intent before they articulate a full request, reducing cognitive load.</p>
-                            </div>
-                        </motion.div>
-                        <motion.div
-                            initial={{ opacity: 0, x: -20 }}
-                            whileInView={{ opacity: 1, x: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: 0.2 }}
-                            className="flex gap-5 items-start"
-                        >
-                            <div className="icon-accent">
-                                <Users className="w-5 h-5 text-amber-400" />
-                            </div>
-                            <div>
-                                <h3 className="font-serif text-lg text-white mb-2">Human Escalation</h3>
-                                <p className="text-sm text-zinc-500 leading-relaxed">We don't replace humans; we elevate them. Complex edge cases are seamlessly handed off to expert operators.</p>
-                            </div>
-                        </motion.div>
+                    <div className="space-y-6">
+                        {features.map((feature, index) => (
+                            <motion.div
+                                key={feature.href}
+                                initial={{ opacity: 0, x: -20 }}
+                                whileInView={{ opacity: 1, x: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                            >
+                                <Link
+                                    href={feature.href}
+                                    className="group flex gap-5 items-start p-4 -m-4 rounded-xl hover:bg-white/[0.02] transition-colors"
+                                >
+                                    <div className="icon-accent">
+                                        <feature.icon className="w-5 h-5 text-amber-400" />
+                                    </div>
+                                    <div className="flex-1">
+                                        <div className="flex items-center gap-2 mb-2">
+                                            <h3 className="font-serif text-lg text-white">{feature.title}</h3>
+                                            <ArrowRight className="w-4 h-4 text-amber-400 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
+                                        </div>
+                                        <p className="text-sm text-zinc-500 leading-relaxed">{feature.description}</p>
+                                    </div>
+                                </Link>
+                            </motion.div>
+                        ))}
                     </div>
                 </div>
 
