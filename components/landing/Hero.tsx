@@ -100,7 +100,7 @@ export function Hero() {
                 >
                     {/* Primary CTA with glow */}
                     <Link
-                        href="#request"
+                        href="/explore"
                         className="group relative w-full sm:w-auto"
                     >
                         <div className="absolute inset-0 bg-amber-400/20 rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>

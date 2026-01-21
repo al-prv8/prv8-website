@@ -129,9 +129,30 @@ export function DemoProvider({ children }: { children: React.ReactNode }) {
 export function ChatDemoPreview() {
     const [visibleMessages, setVisibleMessages] = useState<ChatMessage[]>([]);
     const [currentIndex, setCurrentIndex] = useState(0);
-    const [isAnimating] = useState(true);
+    const [hasStarted, setHasStarted] = useState(false);
     const messagesContainerRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
     const { setDemoStep } = useDemoContext();
+
+    // Detect when component is visible in viewport
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            (entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting && !hasStarted) {
+                        setHasStarted(true);
+                    }
+                });
+            },
+            { threshold: 0.3 } // Start when 30% of the component is visible
+        );
+
+        if (containerRef.current) {
+            observer.observe(containerRef.current);
+        }
+
+        return () => observer.disconnect();
+    }, [hasStarted]);
 
     // Auto-scroll to bottom of chat container only (not the whole page)
     const scrollToBottom = () => {
@@ -146,9 +167,9 @@ export function ChatDemoPreview() {
         return () => clearTimeout(timer);
     }, [visibleMessages]);
 
-    // Auto-play the demo conversation
+    // Auto-play the demo conversation - only when visible
     useEffect(() => {
-        if (!isAnimating) return;
+        if (!hasStarted) return;
         if (currentIndex >= DEMO_SCRIPT.length) {
             // Reset after a pause
             const resetTimer = setTimeout(() => {
@@ -167,10 +188,10 @@ export function ChatDemoPreview() {
         }, currentIndex === 0 ? 1000 : 1800);
 
         return () => clearTimeout(timer);
-    }, [currentIndex, isAnimating, setDemoStep]);
+    }, [currentIndex, hasStarted, setDemoStep]);
 
     return (
-        <div className="h-full flex flex-col bg-zinc-950/90 backdrop-blur-xl overflow-hidden">
+        <div ref={containerRef} className="h-full flex flex-col bg-zinc-950/90 backdrop-blur-xl overflow-hidden">
             {/* Header */}
             <div className="h-14 bg-zinc-900/50 border-b border-white/5 flex items-center justify-between px-5 shrink-0">
                 <div className="flex items-center gap-3">

@@ -10,7 +10,7 @@ export function Navbar() {
             <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
                 {/* Logo */}
                 <Link
-                    href="#"
+                    href="/"
                     className="hover:opacity-80 transition-opacity"
                 >
                     <div className="relative h-9 w-36">
@@ -26,20 +26,20 @@ export function Navbar() {
 
                 {/* Desktop Links */}
                 <div className="hidden md:flex items-center gap-8 text-sm font-medium">
-                    <Link href="#product" className="hover:text-white transition-colors">
+                    <Link href="/#product" className="hover:text-white transition-colors">
                         Product
                     </Link>
-                    <Link href="#how-it-works" className="hover:text-white transition-colors">
-                        How It Works
+                    <Link href="/explore" className="hover:text-white transition-colors">
+                        Explore PRV8
                     </Link>
-                    <Link href="#enterprise" className="hover:text-white transition-colors">
+                    <Link href="/#enterprise" className="hover:text-white transition-colors">
                         Enterprise
                     </Link>
                 </div>
 
                 {/* CTA */}
                 <Link
-                    href="#request"
+                    href="/request"
                     className="group flex items-center gap-2 text-xs font-medium text-white border border-white/10 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-full hover:bg-white hover:text-black transition-all duration-300"
                 >
                     <span>Request Access</span>
